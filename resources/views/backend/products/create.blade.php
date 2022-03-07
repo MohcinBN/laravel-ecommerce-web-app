@@ -7,6 +7,7 @@
     <div class="card-body">
       <h4 class="card-title">Add new product</h4>
       @include('backend.layouts.error')
+      @include('backend.layouts.success')
       <form class="forms-sample" method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
