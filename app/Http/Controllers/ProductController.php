@@ -79,6 +79,16 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
-        //
+        try {
+            // Select the id that to delete
+            $productToBeDeleted = Product::FindOrfail($id);
+            $productToBeDeleted->delete();
+
+            //dd($productToBeDeleted);
+            redirect('/pdoucts-list')->with('status', 'Product Deleted Successfully');
+        } catch (\Throwable $e) {
+            report($e);
+            return true;
+        }
     }
 }

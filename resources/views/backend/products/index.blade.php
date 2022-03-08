@@ -9,6 +9,8 @@
       <p class="card-description">
         You will find all your products below
       </p>
+      @include('backend.layouts.error')
+      @include('backend.layouts.success')
       <div class="table-responsive">
         <table class="table">
           <thead>
@@ -25,9 +27,16 @@
               <tr>
                 <td>{{ $product->id }}</td>
                 <td>{{ $product->name }}</td>
-                <td>{{ $product->price }}</td>
+                <td>{{ $product->price }} $</td>
                 <td><img src="{{ url('uplaods') . '/' . $product->image }}" alt="{{ $product->image }}" style="width: 50px; height: 50px;"></td>
-                <td>Actions</td>
+                <td >
+                  <form action="{{ route('product.destroy', $product->id) }}" method="POST">
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit"<i class="mdi mdi-delete" style="font-size: 27px; color: red"></i> Delete</button>
+                  </form>
+                  <a href="#"><i class="mdi mdi-tooltip-edit" style="font-size: 27px;"></i> Edit</a>
+                </td>
               </tr>
             @endforeach
           </tbody>
