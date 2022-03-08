@@ -32,4 +32,5 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/store', [App\Http\Controllers\ProductController::class, 'store'])->name('product.store');
     Route::get('/pdoucts-list', [App\Http\Controllers\ProductController::class, 'index'])->name('product.index');
     Route::delete('/{id}/delete', [App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');
+    Route::get('product/{id}/edit', [App\Http\Controllers\ProductController::class, 'edit'])->name('product.edit');
 });

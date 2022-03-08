@@ -35,7 +35,7 @@
                     @csrf
                     <button type="submit"<i class="mdi mdi-delete" style="font-size: 27px; color: red"></i> Delete</button>
                   </form>
-                  <a href="#"><i class="mdi mdi-tooltip-edit" style="font-size: 27px;"></i> Edit</a>
+                  <a href="{{ route('product.edit', $product->id) }}"><i class="mdi mdi-tooltip-edit" style="font-size: 27px;"></i> Edit</a>
                 </td>
               </tr>
             @endforeach
