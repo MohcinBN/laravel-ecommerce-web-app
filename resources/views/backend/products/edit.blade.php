@@ -8,8 +8,9 @@
       <h4 class="card-title">Edit product ID: {{ $productToBeEdited->id }}</h4>
       @include('backend.layouts.error')
       @include('backend.layouts.success')
-      <form class="forms-sample" method="POST" action="" enctype="multipart/form-data">
+      <form class="forms-sample" method="POST" action="{{ route('product.update', $productToBeEdited->id) }}" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
         <div class="form-group">
           <label for="name">Product Name</label>
           <input type="text" class="form-control" id="name" name="name" placeholder="Product Name" value="{{ $productToBeEdited->name }}">
@@ -25,7 +26,7 @@
         <div class="form-group">
           <input type="file" name="image" id="image">
         </div>
-        <button type="submit" class="btn btn-primary me-2">Add</button>
+        <button type="submit" class="btn btn-primary me-2">Update</button>
         <button class="btn btn-light">Cancel</button>
       </form>
     </div>

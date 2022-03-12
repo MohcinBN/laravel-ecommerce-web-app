@@ -29,8 +29,6 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request)
     {
-        // call the store Product Request validation
-        $validated = $request->validated();
 
         try {
             // taking the user inputs and storing it into database
@@ -74,7 +72,32 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        // Find the product
+        $productToBeUpdated = Product::FindorFail($id);
+
+        // get all new fields
+        $productToBeUpdated->name = $request->name;
+        $productToBeUpdated->price = $request->price;
+        $productToBeUpdated->description = $request->description;
+
+        // check if there is image, if no try to update it
+        if ($request->hasFile('image')) {
+            if (file_exists('uplaods/') . $productToBeUpdated->image) {
+                unlink(public_path('uplaods/') . $productToBeUpdated->image);
+            }
+
+            // image the new upload
+            if ($request->file('image')) {
+                $file = $request->file('image');
+                $fileName = date('Ymd') . '_' . rand(1, 888) . $file->getClientOriginalName();
+                $file->move(public_path('uplaods'), $fileName);
+                $productToBeUpdated->image = $fileName;
+            }
+        }
+
+        //dd($productToBeUpdated);
+        $productToBeUpdated->save();
+        return redirect('/pdoucts-list')->with('status', 'Product Updated Successfully');
     }
 
 
